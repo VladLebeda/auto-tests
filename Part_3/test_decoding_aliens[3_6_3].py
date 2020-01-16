@@ -13,7 +13,8 @@ def browser():
     yield browser
     print("\nquit browser..")
     browser.quit()
-    
+
+@pytest.mark.aliens_decode    
 @pytest.mark.parametrize('lesson_link', [236895, 236896, 236897, 236898, 236899, 236903, 236904, 236905])
 def test_parametrize_lesson_link(browser, lesson_link):
     link = f"https://stepik.org/lesson/{lesson_link}/step/1"
