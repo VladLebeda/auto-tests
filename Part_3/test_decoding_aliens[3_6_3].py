@@ -2,10 +2,9 @@ import time
 import math
 import pytest
 from selenium import webdriver
-
-
-
-#fixture, initializing browser and cleaning up after the tests?
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
 
 @pytest.fixture(scope="function")
 def browser():
@@ -21,7 +20,9 @@ def test_parametrize_lesson_link(browser, lesson_link):
 
     #open browser
     browser.get(link)
-    time.sleep(3)
+    
+    #waiting untill textarea field is loaded
+    element1 = WebDriverWait(browser, 100).until(EC.presence_of_element_located((By.TAG_NAME, "textarea")))  
     answer_field = browser.find_element_by_css_selector('[class="textarea string-quiz__textarea ember-text-area ember-view"]')
     
     #calculating current answer and sending it to the answer field
@@ -32,12 +33,10 @@ def test_parametrize_lesson_link(browser, lesson_link):
     answer_button = browser.find_element_by_css_selector('[class="submit-submission"]')
     answer_button.click()
     
-    #waiting for loading
-    time.sleep(3)
+    #waiting for page to load after submitting an answer
+    element2 = WebDriverWait(browser, 100).until(EC.presence_of_element_located((By.TAG_NAME, "pre")))
+    
     #check if the text == "Correct!"
     success_field = browser.find_element_by_css_selector('[class="smart-hints__hint"]').text
     assert success_field == "Correct!", "Incorrect answer!"
     
-
-
-
