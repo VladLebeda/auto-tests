@@ -23,21 +23,6 @@ def test_parametrize_lesson_link(browser, lesson_link):
     browser.get(link)
     time.sleep(3)
     answer_field = browser.find_element_by_css_selector('[class="textarea string-quiz__textarea ember-text-area ember-view"]')
-    
-    #calculating current answer and sending it to the answer field
-    answer = math.log(int(time.time()))
-    answer_field.send_keys(str(answer))
-    
-    #finding send button
-    answer_button = browser.find_element_by_css_selector('[class="submit-submission"]')
-    answer_button.click()
-    
-    #waiting for loading
     time.sleep(3)
-    #check if the text == "Correct!"
-    success_field = browser.find_element_by_css_selector('[class="smart-hints__hint"]').text
-    assert success_field == "Correct!", "Incorrect answer!"
     
-
-
 
