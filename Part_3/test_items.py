@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 
 @pytest.mark.language_test
-def test_language_link(browser):
+def test_add_to_the_cart_button(browser):
     link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
     browser.get(link)  # We get browser language via prefs or intl from browser(request) fixture
 
